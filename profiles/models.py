@@ -4,7 +4,9 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Profile():
-    user = models.OneToOneField(User, on_delete=models.CASCADE) 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    identification_num = models.IntegerField()
 
     token = models.CharField(blank=True, max_length=30)
 
