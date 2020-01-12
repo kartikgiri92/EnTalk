@@ -25,7 +25,7 @@ SECRET_KEY = '_wnbws1$8oirrqx_v4@n8%5dsb2bvt3t%x*jtjpqjytej5xx!e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 ''' To Run website on other devices on same network, get the ip address and put it in allowed hosts
     and then run python3 manage.py runserver ipaddress:8000.
     To access it, browse ipaddress:8000.
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'profiles',
 ]
 
