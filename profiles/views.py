@@ -24,9 +24,12 @@ class CreateUser(CreateAPIView):
     serializer_class = pro_serializers.BaseUserSerializer
     
     def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.serializer_class(data=request.data, context = request)
+
         if(not(serializer.is_valid())):
             errors = list(serializer.errors.keys())
             return Response({'message':'User Not Created', 'status':False, 'errors' : errors})
         self.perform_create(serializer)
-        return Response({'message':'User Created Succesfully', 'status':True, 'token' : ''})
+        new_user = User.objects.get(username = serializer.data['username'])
+        return Response({'message':'User Created Succesfully', 'status':True,
+            'user' : serializer.data, 'token' : new_user.profile.token})

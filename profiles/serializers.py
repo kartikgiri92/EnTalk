@@ -6,9 +6,6 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model();
 
-# fields = ('id', 'token', 'time_token_created', 'private_key', 'public_key', 'profile_user_details')
-# fields = ('username', 'email', 'password', 'first name', 'last name')
-
 class BaseProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = pro_models.Profile
@@ -17,15 +14,16 @@ class BaseProfileSerializer(serializers.ModelSerializer):
 class BaseUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'first_name', 'last_name')
+        fields = ('username', 'email', 'first_name', 'last_name')
 
     def create(self, validated_data):
-        new_user = User.objects.create(**validated_data)
-        # user_profile = pro_models.Profile.objects.create(user = user, token = ,
-        #             time_token_created = pro_utils.current_milli_time, private_key = , public_key =)
-
+        new_user = User(**validated_data)
+        new_user.set_password(self.context.data['password'])
+        new_user.save()
+        user_profile = pro_models.Profile.objects.create(user = new_user, 
+            token = pro_utils.random_string_generator(), time_token_created = pro_utils.current_milli_time(),
+            private_key = pro_utils.random_string_generator(), public_key = pro_utils.random_string_generator())
         return(new_user)
-        return(user_profile.token)
 
     # def update(self, instance, validated_data):
 
