@@ -11,10 +11,7 @@ app_name = 'profiles'
 urlpatterns = [
     # url(r'^', include(router.urls)),
 
-    path('', pro_views.All_Users.as_view()),
-
-
-    # path('client/create/', sud_views.ClientDetail.as_view()),
+    path('create/', pro_views.CreateUser.as_view()),
     # path('client/create/<int:id>/', sud_views.ClientDetail.as_view()),
 
     # path('list-subjects/', sud_views.ListSubject.as_view()),
