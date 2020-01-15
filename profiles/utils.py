@@ -4,10 +4,11 @@ import profiles.models as pro_models
 
 from string import ascii_letters, punctuation
 
-six_hrs_in_milli_time = 21600
-
 def current_milli_time():
     return int(round(time.time() * 1000))
+
+def current_milli_time_after_six_hrs():
+    return int(round((time.time() + 21600) * 1000)) # 21600 = 6hrs in milli time
 
 def random_string_generator():
     generated_string = ''
@@ -31,7 +32,7 @@ def TokenAuthenticate(request):
     profile = pro_models.Profile.objects.filter(id = profile_id, token = profile_token)
     if(profile):
         profile = profile[0]
-        temp = int(profile.time_token_created) + six_hrs_in_milli_time
+        temp = int(profile.time_token_created) + current_milli_time_after_six_hrs()
         if(temp > current_milli_time()):
             return(True, profile)
     return(False, None)

@@ -25,17 +25,9 @@ class BaseUserSerializer(serializers.ModelSerializer):
             private_key = pro_utils.random_string_generator(), public_key = pro_utils.random_string_generator())
         return(new_user)
 
-    # def update(self, instance, validated_data):
-
-    #     cp = instance.clientprofile
-    #     clientprofile_data = validated_data.pop('clientprofile')
-
-    #     for field_name, value in validated_data.items():
-    #         setattr(instance, field_name, value)
-    #     instance.save()
-        
-    #     for field_name, value in clientprofile_data.items():
-    #         setattr(cp, field_name, value)
-    #     cp.save()
-
-    #     return(instance)
+    def update(self, instance, validated_data):
+        for field_name, value in validated_data.items():
+            setattr(instance, field_name, value)
+        instance.set_password(self.context.data['new_password'])
+        instance.save()
+        return(instance)
