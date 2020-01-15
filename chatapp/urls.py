@@ -7,4 +7,5 @@ admin.site.site_header = 'ChatApp Admin'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/profiles/', include('profiles.urls')),
+    path('api/messaging/', include('messaging.urls')),
 ]
