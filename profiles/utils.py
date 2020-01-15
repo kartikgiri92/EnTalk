@@ -26,8 +26,8 @@ def token_generator():
     return('42');
 
 def TokenAuthenticate(request):
-    profile_id = request.data['id']
-    profile_token = request.data['token']
+    profile_id = request.headers['Id']
+    profile_token = request.headers['Authorization']
     profile = pro_models.Profile.objects.filter(id = profile_id, token = profile_token)
     if(profile):
         profile = profile[0]
