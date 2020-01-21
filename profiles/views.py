@@ -41,7 +41,7 @@ class UserLogout(GenericAPIView):
     def post(self, request):
         token_auth, profile = pro_utils.TokenAuthenticate(request)
         if(not(token_auth)):
-            return(Response({'message':'User Logged Out', 'status':True, 'token': False}))
+            return(Response({'message':'User Logged Out', 'status':False, 'token': False}))
 
         profile.token = profile.time_token_created = ''
         profile.save()
@@ -64,7 +64,7 @@ class CreateUser(CreateAPIView, UpdateAPIView):
     def update(self, request, *args, **kwargs):
         token_auth, profile = pro_utils.TokenAuthenticate(request)
         if(not(token_auth)):
-            return(Response({'message':'User Logged Out', 'status':True, 'token': False}))
+            return(Response({'message':'User Logged Out', 'status':False, 'token': False}))
 
         instance = profile.user
         serializer = self.serializer_class(instance, data=request.data, context = request, partial = True)
