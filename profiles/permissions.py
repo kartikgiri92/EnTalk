@@ -7,7 +7,6 @@ class TokenAuthenticate(permissions.BasePermission):
     def has_permission(self, request, view):
         profile_id = request.data['id']
         profile_token = request.data['token']
-        print(request.data)
         if(pro_models.Profile.objects.filter(id = profile_id, token = profile_token)):
             return(True)
         return(False)
