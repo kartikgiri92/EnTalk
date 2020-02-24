@@ -2,13 +2,72 @@
 {% load static %}
 
 {% block extra_css %}
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'profiles/css/homepage.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'profiles/css/login_sign_up.css' %}">
 {% endblock %}
         
 {% block page_content %}
+    <div class="pt-4 d-flex justify-content-center font-weight-bold bg-info"><h3>EnTalk</h3></div>
 
-    <div class="p-5">
-        <h1>HI</h1>
+    <div class="row">
+        <div class="col-5 mt-4 ml-3">
+            <h5 class="mt d-flex justify-content-center">Login</h5>
+            <form>
+                <div class="form-group row">
+                    <label for="login-username" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="login-username" placeholder="username">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="login-password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="login-password" placeholder="Password">
+                    </div>
+                </div>
+            </form>
+            <div class="btn btn-primary btn-md" id="login-submit">
+                Login
+            </div>
+        </div>
+        <div class="col-1 mt-4 mx-1 pt-5">
+            OR
+        </div>
+        <div class="col-5 mt-4 mr-3">
+            <h5 class="mt d-flex justify-content-center">Register</h5>
+            <form>
+                <div class="form-group row">
+                    <label for="register-username" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="register-username" placeholder="username">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="register-email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="register-email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="register-password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="register-password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="register-firstname">First Name</label>
+                        <input type="text" class="form-control" id="register-firstname" placeholder="First Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="register-surname">SurName</label>
+                        <input type="text" class="form-control" id="register-surname" placeholder="SurName">
+                    </div>
+                </div>
+            </form>
+            <div class="btn btn-primary btn-md" id="register-submit">
+                Register
+            </div>
+        </div>
     </div>
 
 {% endblock %}

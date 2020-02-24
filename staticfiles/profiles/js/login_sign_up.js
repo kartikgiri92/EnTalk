@@ -1,21 +1,71 @@
 var window_location_origin = window.location.origin
 
-const api_call = async () => {
-    let response = await fetch(window_location_origin + "/api/profiles/create/", {
-        method: "GET",
-    });
-    if(response.ok){
-        let json_obj = await response.json();
+// Login Section Variables
+var login_btn = document.querySelector("#login-submit")
+var login_username = document.querySelector("#login-username")
+var login_password = document.querySelector("#login-password")
 
-        // WRITE YOUR STUFF FROM HERE
-        console.log(json_obj);
-    }
-    else{
-        console.log("NETWORK Error occured, reload the page.");
-    }
-}
 
-// On Page Load
-window.addEventListener('load', (event) => {
-    api_call();
+// Register Section Variables
+var register_btn = document.querySelector("#register-submit")
+var register_username = document.querySelector("#register-username")
+var register_email = document.querySelector("#register-email")
+var register_password = document.querySelector("#register-password")
+var register_firstname = document.querySelector("#register-firstname")
+var register_surname = document.querySelector("#register-surname")
+
+
+// Login Section
+
+
+
+login_btn.addEventListener('click', event => {
+    var flag = true;
+    if(!(login_username.value)){
+        flag = false;
+        window.alert("Enter Login Username")
+    }
+    if(!(login_password.value)){
+        flag = false;
+        window.alert("Enter Login Password")
+    }
+
+    if(flag){
+        // call API
+    }
 });
+
+
+// Register Section
+
+
+
+
+register_btn.addEventListener('click', event => {
+    var flag = true;
+    if(!(register_username.value)){
+        flag = false;
+        window.alert("Enter Register Username")
+    }
+    if(!(register_email.value)){
+        flag = false;
+        window.alert("Enter Register email")
+    }
+    if(!(register_password.value)){
+        flag = false;
+        window.alert("Enter Register Password")
+    }
+    if(!(register_firstname.value)){
+        flag = false;
+        window.alert("Enter Register First Name")
+    }
+    if(!(register_surname.value)){
+        flag = false;
+        window.alert("Enter Register SurName")
+    }
+
+    if(flag){
+        // call API
+    }
+});
+
