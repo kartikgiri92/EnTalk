@@ -21,6 +21,16 @@ User = get_user_model();
 # print(len(connection.queries))
 # reset_queries()
 
+class RetrieveUserDetail(GenericAPIView):
+    def get(self, request, *args, **kwargs):
+        token_auth, profile = pro_utils.TokenAuthenticate(request)
+        if(not(token_auth)):
+            return(Response({'message':'User Logged Out', 'status':False, 'token': False}))
+
+        instance = profile.user
+        serializer = pro_serializers.BaseUserSerializer(instance)
+        return Response({'status':True, 'user' : serializer.data, 'token' : True})
+
 class UserLogin(GenericAPIView):
 
     def post(self, request):

@@ -14,5 +14,6 @@ urlpatterns = [
     path('login/', pro_views.UserLogin.as_view()),
     path('logout/', pro_views.UserLogout.as_view()),
     path('create/', pro_views.CreateUser.as_view()),
+    path('rtd/', pro_views.RetrieveUserDetail.as_view()),
     
 ]

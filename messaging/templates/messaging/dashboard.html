@@ -7,26 +7,93 @@
         
 {% block page_content %}
     <div class="row">
-        <div class="col-4">
-            hi
+        <div class="col-3 pl-2 bg-light">
+            <div id="user-section" class="py-2 pl-2 d-flex justify-content-between">
+                <div id="user-name" class="pt-2 pl-2">
+                    <!-- Fill user name here -->
+                    Username
+                    <!-- Trim the name to max 15 characters -->
+                </div>
+                <div class="d-flex justify-content-around">
+                    <div id="search-btn" class="btn bg-light">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button id="update-profile" class="dropdown-item" type="button">Update Profile</button>
+                            <button id="logout" class="dropdown-item" type="button">Logout</button>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+
+            <!-- User Chats -->
+            <hr class="rounded-pill">
+            <h3 class="py-2 pl-3 bg-white"> User Chat 1</h3>
+            <hr class="rounded-pill">
+            <h3 class="py-2 pl-3 bg-white"> User Chat 2</h3>
+            <hr class="rounded-pill">
+            <h3 class="py-2 pl-3 bg-white"> User Chat 3</h3>
+            <hr class="rounded-pill">
+            <h3 class="py-2 pl-3 bg-white"> User Chat 4</h3>
+            <hr class="rounded-pill">
         </div>
-        <div class="col-8">
-            hi
+
+        <!-- Chat Space -->
+        <div class="col-9 py-4 pl-5" id="chat-space" style="display: none;"></div>
+
+        <!-- Search Space -->
+        <div class="col-9 py-4 pl-5" id="search-space" style="display: none;"></div>
+
+        
+        <!-- Profile Update Space -->
+        <div class="col-9 py-4 pl-5" id="profile-update-space" style="display: none;">
+            <h5 class="mb-2">Update Profile</h5>
+            <form>
+                <div class="form-group row">
+                    <label for="register-username" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="register-username" placeholder="username" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="register-email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-6">
+                        <input type="email" class="form-control" id="register-email" placeholder="Email" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="register-password" class="col-sm-2 col-form-label">Current Password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="register-password" placeholder="Current Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="new-password" class="col-sm-2 col-form-label">New Password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="new-password" placeholder="New Password">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="register-firstname">First Name</label>
+                        <input type="text" class="form-control" id="register-firstname" placeholder="First Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="register-surname">SurName</label>
+                        <input type="text" class="form-control" id="register-surname" placeholder="SurName">
+                    </div>
+                </div>
+            </form>
+
+            <div class="btn btn-primary btn-md" id="register-submit">
+                Update
+            </div>
         </div>
     </div>
-    <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      One of three columns
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div>
-  </div>
-</div>
 
 {% endblock %}
     

@@ -1,20 +1,6 @@
+// Global Variables and functions
 var window_location_origin = window.location.origin
 
-// Login Section Variables
-var login_btn = document.querySelector("#login-submit")
-var login_username = document.querySelector("#login-username")
-var login_password = document.querySelector("#login-password")
-
-// Register Section Variables
-var register_btn = document.querySelector("#register-submit")
-var register_username = document.querySelector("#register-username")
-var register_email = document.querySelector("#register-email")
-var register_password = document.querySelector("#register-password")
-var register_firstname = document.querySelector("#register-firstname")
-var register_surname = document.querySelector("#register-surname")
-
-
-// Global Variables and functions
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -32,6 +18,20 @@ function getCookie(name) {
 }
 
 const csrf_token = getCookie("csrftoken");
+
+
+// Login Section Variables
+var login_btn = document.querySelector("#login-submit")
+var login_username = document.querySelector("#login-username")
+var login_password = document.querySelector("#login-password")
+
+// Register Section Variables
+var register_btn = document.querySelector("#register-submit")
+var register_username = document.querySelector("#register-username")
+var register_email = document.querySelector("#register-email")
+var register_password = document.querySelector("#register-password")
+var register_firstname = document.querySelector("#register-firstname")
+var register_surname = document.querySelector("#register-surname")
 
 
 // Login Section
