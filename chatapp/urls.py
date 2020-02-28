@@ -10,7 +10,6 @@ urlpatterns = [
     path('api/profiles/', include('profiles.urls')),
     path('api/messaging/', include('messaging.urls')),
     path('', TemplateView.as_view(template_name="profiles/login_sign_up.html")),
-    path('dashboard/profile_update/', TemplateView.as_view(template_name="profiles/profile_update.html")),
     path('dashboard/', TemplateView.as_view(template_name="messaging/dashboard.html")),
 
 ]

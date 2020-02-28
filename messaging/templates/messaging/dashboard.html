@@ -2,18 +2,35 @@
 {% load static %}
 
 {% block extra_css %}
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'profiles/css/homepage.css' %}"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'messaging/css/dashboard.css' %}"> -->
 {% endblock %}
         
 {% block page_content %}
-
-    <div class="p-5">
-        <h1>DASHBOARD!</h1>
+    <div class="row">
+        <div class="col-4">
+            hi
+        </div>
+        <div class="col-8">
+            hi
+        </div>
     </div>
+    <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+</div>
 
 {% endblock %}
     
 
 {% block extra_js %}
-    <!-- <script type="text/javascript" src="{% static 'prime/js/homepage.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'messaging/js/dashboard.js' %}"></script>
 {% endblock %}

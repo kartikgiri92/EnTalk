@@ -28,9 +28,14 @@ class UserLogin(GenericAPIView):
         if(not(user) or not(user[0].check_password(request.data['password']))):
             return(Response({'message':'UserName or Password is Wrong', 'status':False}))
         user = user[0]
-        user.profile.token = pro_utils.token_generator()
-        user.profile.time_token_created = pro_utils.current_milli_time()
-        user.profile.save()
+        if(pro_models.Profile.objects.filter(user = user).exists()):
+            user.profile.token = pro_utils.token_generator()
+            user.profile.time_token_created = pro_utils.current_milli_time()
+            user.profile.save()
+        else:
+            user_profile = pro_models.Profile.objects.create(user = user, 
+                token = pro_utils.token_generator(), time_token_created = pro_utils.current_milli_time(),
+                private_key = pro_utils.random_string_generator(), public_key = pro_utils.random_string_generator())
 
         user_data = pro_serializers.BaseUserSerializer(user)
         return Response({'message':'User Successfully Logged In', 'status':True,
