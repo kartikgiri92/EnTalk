@@ -20,6 +20,8 @@ function getCookie(name) {
 const csrf_token = getCookie("csrftoken");
 
 function redirect_to_login(){
+    localStorage.removeItem('id');
+    localStorage.removeItem('token');
     window.location = window_location_origin;
 }
 
@@ -216,5 +218,6 @@ window.addEventListener('load', (event) => {
     if(!stored_token || !stored_id){
         redirect_to_login();
     }
+    retrieve_user_detail();
 
 });
