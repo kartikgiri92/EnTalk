@@ -26,26 +26,27 @@ function redirect_to_login(){
 }
 
 const logout_the_user = async () => {
-    let temp_url = window_location_origin + "/api/profiles/logout/";
-    let response = await fetch(temp_url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            "X-CSRFToken": csrf_token, 
-            "Id": localStorage.getItem("id"),
-            "Authorization": localStorage.getItem("token"),
-        },
-        body: JSON.stringify({
-        }),
-    });
-    if(response.ok){
-        localStorage.removeItem("token");
-        localStorage.removeItem("id");
-        redirect_to_login();
-    }
-    else{
-        window.alert("Error occured, reload the page.")
-    }
+    redirect_to_login();
+    // let temp_url = window_location_origin + "/api/profiles/logout/";
+    // let response = await fetch(temp_url, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         "X-CSRFToken": csrf_token, 
+    //         "Id": localStorage.getItem("id"),
+    //         "Authorization": localStorage.getItem("token"),
+    //     },
+    //     body: JSON.stringify({
+    //     }),
+    // });
+    // if(response.ok){
+    //     localStorage.removeItem("token");
+    //     localStorage.removeItem("id");
+    //     redirect_to_login();
+    // }
+    // else{
+    //     window.alert("Error occured, reload the page.")
+    // }
 }
 
 const retrieve_user_detail = async () => {
