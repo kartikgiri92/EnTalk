@@ -1,9 +1,9 @@
 import profiles.models as pro_models
 from rest_framework import permissions
 
-# Not Used Anywhere right now
-class TokenAuthenticate(permissions.BasePermission):
 
+class TokenAuthenticate(permissions.BasePermission):
+	# Not Used Anywhere right now
     def has_permission(self, request, view):
         profile_id = request.data['id']
         profile_token = request.data['token']

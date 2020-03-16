@@ -53,7 +53,7 @@ class UserLogin(GenericAPIView):
 
 class UserLogout(GenericAPIView):
 
-    def post(self, request):
+    def get(self, request):
         token_auth, profile = pro_utils.TokenAuthenticate(request)
         if(not(token_auth)):
             return(Response({'message':'User Logged Out', 'status':False, 'token': False}))

@@ -26,27 +26,22 @@ function redirect_to_login(){
 }
 
 const logout_the_user = async () => {
-    redirect_to_login();
-    // let temp_url = window_location_origin + "/api/profiles/logout/";
-    // let response = await fetch(temp_url, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         "X-CSRFToken": csrf_token, 
-    //         "Id": localStorage.getItem("id"),
-    //         "Authorization": localStorage.getItem("token"),
-    //     },
-    //     body: JSON.stringify({
-    //     }),
-    // });
-    // if(response.ok){
-    //     localStorage.removeItem("token");
-    //     localStorage.removeItem("id");
-    //     redirect_to_login();
-    // }
-    // else{
-    //     window.alert("Error occured, reload the page.")
-    // }
+    // redirect_to_login();
+    let temp_url = window_location_origin + "/api/profiles/logout/";
+    let response = await fetch(temp_url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Id": localStorage.getItem("id"),
+            "Authorization": localStorage.getItem("token"),
+        },
+    });
+    if(response.ok){
+        redirect_to_login();
+    }
+    else{
+        window.alert("Error occured, reload the page.")
+    }
 }
 
 const retrieve_user_detail = async () => {
@@ -118,6 +113,7 @@ var register_firstname = document.querySelector("#register-firstname")
 var register_surname = document.querySelector("#register-surname")
 
 const register_user = async () => {
+    // This is executed when Profile is Updated
     let temp_url = window_location_origin + "/api/profiles/create/";
     let response = await fetch(temp_url, {
         method: 'PUT',
