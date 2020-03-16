@@ -26,7 +26,6 @@ function redirect_to_login(){
 }
 
 const logout_the_user = async () => {
-    // redirect_to_login();
     let temp_url = window_location_origin + "/api/profiles/logout/";
     let response = await fetch(temp_url, {
         method: 'GET',
