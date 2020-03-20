@@ -207,6 +207,8 @@ logout.addEventListener('click', event => {
     logout_the_user();
 });
 
+// User Chats
+
 // On Page Load
 window.addEventListener('load', (event) => {
     let stored_token = localStorage.getItem("token");
