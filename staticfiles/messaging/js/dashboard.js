@@ -1,5 +1,6 @@
 // Global Variables and functions
 var window_location_origin = window.location.origin
+var intervalID = ""
 
 function getCookie(name) {
     var cookieValue = null;
@@ -71,7 +72,12 @@ const retrieve_user_detail = async () => {
     }
 }
 
+function delete_interval(){
+    clearInterval(intervalID);
+}
+
 function hide_chat_space(){
+    delete_interval();
     document.querySelector("#chat-space").style.display = "none";
 }
 
@@ -96,17 +102,25 @@ function display_profile_update_space(){
 }
 
 
-// Chat Space
+// STart Chat Space
 var chat_space = document.querySelector("#chat-space")
 
 function fill_chat_space(friend_profile_id){
     hide_search_space();
     hide_profile_update_space();
-    display_chat_space()
+    display_chat_space();
+    delete_interval();
+    intervalID = window.setInterval(function(){        
+        console.log(friend_profile_id);
+    }, 2000);
 }
+// END Chat Space
 
-// Search Space
+
+// START Search Space
 var search_space = document.querySelector("#search-space")
+// END Search Space
+
 
 // Profile Update Space Start
 var profile_update_space = document.querySelector("#profile-update-space")
@@ -223,7 +237,7 @@ const fill_user_chats = async () => {
                     temp_obj.style.cursor = "pointer";
                     temp_obj.addEventListener('click', event => {
                         // When clicked, chat will be displayed
-                        fill_chat_space(json_obj.profile_id);
+                        fill_chat_space(ele_obj.profile_id);
                     });
                     user_chats_block.prepend(temp_obj);
                 }
