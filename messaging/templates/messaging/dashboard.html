@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block extra_css %}
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'messaging/css/dashboard.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'messaging/css/dashboard.css' %}">
 {% endblock %}
         
 {% block page_content %}
     <div class="row">
-        <div class="col-3 pl-2 bg-light">
+        <div id="sidebar" class="col-3">
             <div id="user-section" class="py-2 pl-2 d-flex justify-content-between">
                 <div id="user-name" class="pt-2 pl-2">
                     <!-- Fill user name here -->
@@ -15,14 +15,14 @@
                     <!-- Trim the name to max 15 characters -->
                 </div>
                 <div class="d-flex justify-content-around">
-                    <div id="search-btn" class="btn bg-light">
+                    <div id="search-btn" class="btn custom-light-blue-color">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </div>
                     <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn custom-light-blue-color dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-cog" aria-hidden="true"></i>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <div class="dropdown-menu custom-light-blue-color" aria-labelledby="dropdownMenu2">
                             <button id="update-profile" class="dropdown-item" type="button">Update Profile</button>
                             <button id="logout" class="dropdown-item" type="button">Logout</button>
                         </div>
@@ -31,15 +31,9 @@
             </div>
 
             <!-- User Chats -->
-            <hr class="rounded-pill">
-            <h3 class="py-2 pl-3 bg-white"> User Chat 1</h3>
-            <hr class="rounded-pill">
-            <h3 class="py-2 pl-3 bg-white"> User Chat 2</h3>
-            <hr class="rounded-pill">
-            <h3 class="py-2 pl-3 bg-white"> User Chat 3</h3>
-            <hr class="rounded-pill">
-            <h3 class="py-2 pl-3 bg-white"> User Chat 4</h3>
-            <hr class="rounded-pill">
+            <!-- <hr class="rounded-pill"> -->
+            
+
         </div>
 
         <!-- Chat Space -->
