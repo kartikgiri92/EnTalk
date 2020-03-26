@@ -1,26 +1,28 @@
-.custom-light-blue-color{
-	background: #cee3e6;
+.custom-sidebar-cards{
+    background: #cee3e6;
+    margin: 15px;
+    padding-top: 5px;
 }
 
 #sidebar{
     overflow-y: scroll;  
-    width: 250px;
+    width: 300px;
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     z-index: 999;
-    color: #fff;
     transition: all 0.3s;
     background: #24344b;
 }
 
-#content {
-	width: calc(100% - 250px);
+.workspace{
+    width: calc(100% - 300px);
     padding: 0px;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
     top: 0;
     right: 0;
+    background: #cee3e6;
 }

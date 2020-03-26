@@ -56,6 +56,7 @@ const retrieve_user_detail = async () => {
     if(response.ok){
         let json_obj = await response.json();
         if(json_obj.status){
+            user_name.innerHTML = json_obj.user.username;
             register_username.value = json_obj.user.username;
             register_email.value = json_obj.user.email;
             register_firstname.value = json_obj.user.first_name;
@@ -98,10 +99,16 @@ function display_profile_update_space(){
 // Chat Space
 var chat_space = document.querySelector("#chat-space")
 
+function fill_chat_space(friend_profile_id){
+    hide_search_space();
+    hide_profile_update_space();
+    display_chat_space()
+}
+
 // Search Space
 var search_space = document.querySelector("#search-space")
 
-// Profile Update Space
+// Profile Update Space Start
 var profile_update_space = document.querySelector("#profile-update-space")
 var register_btn = document.querySelector("#register-submit")
 var register_username = document.querySelector("#register-username")
@@ -183,8 +190,60 @@ register_btn.addEventListener('click', event => {
 function fill_update_profile_columns(){
     retrieve_user_detail();
 }
+// Profile Update Space END
 
-// User Space
+// User Chats START
+const fill_user_chats = async () => {
+    let user_chats_block = document.querySelector("#fill-user-chats")
+    let temp_url = window_location_origin + "/api/messaging/gac/";
+    let response = await fetch(temp_url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": csrf_token, 
+            "Id": localStorage.getItem("id"),
+        },
+    });
+    if(response.ok){
+        let json_obj = await response.json();
+        if(json_obj.status){
+            json_obj.data.forEach(function(ele_obj){
+                temp_obj = document.querySelector("#user-chat-block-" + ele_obj.profile_id)
+                if(temp_obj){
+                    // Card Already exist so make only required changes
+                    temp_obj.lastElementChild.innerHTML = ele_obj.total_messages + " Total Messages";
+                }
+                else{
+                    // Making a new card
+                    temp_obj = document.querySelector("#user-chat-block").cloneNode(true);
+                    temp_obj.firstElementChild.innerHTML = ele_obj.username;
+                    temp_obj.lastElementChild.innerHTML = ele_obj.total_messages + " Total Messages";
+                    temp_obj.id = "user-chat-block-" + ele_obj.profile_id;
+                    temp_obj.style.display = "block";
+                    temp_obj.style.cursor = "pointer";
+                    temp_obj.addEventListener('click', event => {
+                        // When clicked, chat will be displayed
+                        fill_chat_space(json_obj.profile_id);
+                    });
+                    user_chats_block.prepend(temp_obj);
+                }
+            });
+        }
+        else{
+            redirect_to_login();
+        }
+    }
+}
+
+function fill_user_chats_helper(){
+    window.setInterval(function(){
+        fill_user_chats();
+    }, 5000);
+}
+
+// User Chats END
+
+// User Space START
 var user_name = document.querySelector("#user-name")
 var search = document.querySelector("#search-btn")
 var update_profile = document.querySelector("#update-profile")
@@ -206,8 +265,7 @@ update_profile.addEventListener('click', event => {
 logout.addEventListener('click', event => {
     logout_the_user();
 });
-
-// User Chats
+// USER SPACE END
 
 // On Page Load
 window.addEventListener('load', (event) => {
@@ -217,5 +275,6 @@ window.addEventListener('load', (event) => {
         redirect_to_login();
     }
     retrieve_user_detail();
-
+    fill_user_chats();
+    fill_user_chats_helper();
 });

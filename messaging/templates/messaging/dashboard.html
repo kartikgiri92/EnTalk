@@ -6,88 +6,115 @@
 {% endblock %}
         
 {% block page_content %}
-    <div class="row">
-        <div id="sidebar" class="col-3">
-            <div id="user-section" class="py-2 pl-2 d-flex justify-content-between">
-                <div id="user-name" class="pt-2 pl-2">
-                    <!-- Fill user name here -->
-                    Username
-                    <!-- Trim the name to max 15 characters -->
-                </div>
-                <div class="d-flex justify-content-around">
-                    <div id="search-btn" class="btn custom-light-blue-color">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn custom-light-blue-color dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-cog" aria-hidden="true"></i>
-                        </button>
-                        <div class="dropdown-menu custom-light-blue-color" aria-labelledby="dropdownMenu2">
-                            <button id="update-profile" class="dropdown-item" type="button">Update Profile</button>
-                            <button id="logout" class="dropdown-item" type="button">Logout</button>
-                        </div>
-                    </div>    
-                </div>
+
+    <!-- SideBar Start -->
+    <div id="sidebar">
+        <div id="user-section" class="custom-sidebar-cards rounded-pill" style="background: #ffde7a!important;">
+            <div id="user-name" class="d-flex justify-content-center">
+                <!-- Fill username here through Javascript -->
             </div>
-
-            <!-- User Chats -->
-            <!-- <hr class="rounded-pill"> -->
-            
-
+            <hr class="rounded-pill" style="margin: 0px;">
+            <div class="d-flex justify-content-around">
+                <div id="search-btn" class="btn">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cog" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="background: #ffde7a;">
+                        <button id="update-profile" class="dropdown-item" type="button">Update Profile</button>
+                        <button id="logout" class="dropdown-item" type="button">Logout</button>
+                    </div>
+                </div>    
+            </div>
         </div>
 
-        <!-- Chat Space -->
-        <div class="col-9 py-4 pl-5" id="chat-space" style="display: none;"></div>
+        <div class="custom-sidebar-cards rounded-pill"></div>
 
-        <!-- Search Space -->
-        <div class="col-9 py-4 pl-5" id="search-space" style="display: none;"></div>
+        <!-- User Chats Start-->
+        <div id="fill-user-chats">
+
+            <!-- This first card is an Exmple Card -->
+            <!-- This is used to clone other cards -->
+            <div id="user-chat-block" class="custom-sidebar-cards rounded-pill" style="display: none;">
+                <div id="friend-name" class="d-flex justify-content-center">
+                        <!-- Add Friend Name -->
+                </div>
+                <hr class="rounded-pill" style="margin: 0px;">
+                <div id="friend-total-messages" class="d-flex justify-content-center">
+                        <!-- Add Number of Total Messages -->
+                </div>
+            </div>
+            <!-- Exmple Card END-->
+
+        </div>
+        <!-- User Chats End-->
 
         
-        <!-- Profile Update Space -->
-        <div class="col-9 py-4 pl-5" id="profile-update-space" style="display: none;">
-            <h5 class="mb-2">Update Profile</h5>
-            <form>
-                <div class="form-group row">
-                    <label for="register-username" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="register-username" placeholder="username" readonly>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="register-email" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" id="register-email" placeholder="Email" readonly>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="register-password" class="col-sm-2 col-form-label">Current Password</label>
-                    <div class="col-sm-6">
-                        <input type="password" class="form-control" id="register-password" placeholder="Current Password">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="new-password" class="col-sm-2 col-form-label">New Password</label>
-                    <div class="col-sm-6">
-                        <input type="password" class="form-control" id="new-password" placeholder="New Password">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="register-firstname">First Name</label>
-                        <input type="text" class="form-control" id="register-firstname" placeholder="First Name">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="register-surname">SurName</label>
-                        <input type="text" class="form-control" id="register-surname" placeholder="SurName">
-                    </div>
-                </div>
-            </form>
 
-            <div class="btn btn-primary btn-md" id="register-submit">
-                Update
+    </div>
+    <!-- Sidebar End -->
+
+    <!-- Chat Space Start-->
+    <div class="py-4 pl-5 workspace" id="chat-space" style="display: none;">
+    
+    </div>
+    <!-- Chat Space END-->
+
+    <!-- Search Space Start-->
+    <div class="py-4 pl-5 workspace" id="search-space" style="display: none;">
+        
+
+    </div>
+    <!-- Search Space End-->
+
+    
+    <!-- Profile Update Space Start-->
+    <div class="py-4 pl-5 workspace" id="profile-update-space" style="display: none;">
+        <h5 class="mb-2">Update Profile</h5>
+        <form>
+            <div class="form-group row">
+                <label for="register-username" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="register-username" placeholder="username" readonly>
+                </div>
             </div>
+            <div class="form-group row">
+                <label for="register-email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-6">
+                    <input type="email" class="form-control" id="register-email" placeholder="Email" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="register-password" class="col-sm-2 col-form-label">Current Password</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="register-password" placeholder="Current Password">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="new-password" class="col-sm-2 col-form-label">New Password</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="new-password" placeholder="New Password">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="register-firstname">First Name</label>
+                    <input type="text" class="form-control" id="register-firstname" placeholder="First Name">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="register-surname">SurName</label>
+                    <input type="text" class="form-control" id="register-surname" placeholder="SurName">
+                </div>
+            </div>
+        </form>
+
+        <div class="btn btn-primary btn-md" id="register-submit">
+            Update
         </div>
     </div>
+    <!-- Profile Update Space End-->
 
 {% endblock %}
     
