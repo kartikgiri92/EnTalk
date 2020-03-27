@@ -18,7 +18,6 @@
 
 .workspace{
     width: calc(100% - 300px);
-    padding: 0px;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
