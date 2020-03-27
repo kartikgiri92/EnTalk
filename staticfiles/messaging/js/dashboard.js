@@ -85,6 +85,10 @@ function display_chat_space(){
     document.querySelector("#chat-space").style.display = "block";
 }
 
+function hide_rough_space(){
+    document.querySelector("#rough-space").style.display = "none";
+}
+
 function hide_search_space(){
     document.querySelector("#search-space").style.display = "none";
 }
@@ -106,6 +110,7 @@ function display_profile_update_space(){
 var chat_space = document.querySelector("#chat-space")
 
 function fill_chat_space(friend_profile_id){
+    hide_rough_space();
     hide_search_space();
     hide_profile_update_space();
     display_chat_space();
@@ -264,12 +269,14 @@ var update_profile = document.querySelector("#update-profile")
 var logout = document.querySelector("#logout")
 
 search.addEventListener('click', event => {
+    hide_rough_space();
     hide_chat_space();
     hide_profile_update_space();
     display_search_space();
 });
 
 update_profile.addEventListener('click', event => {
+    hide_rough_space();
     hide_chat_space();
     hide_search_space();
     display_profile_update_space();
