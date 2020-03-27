@@ -49,7 +49,27 @@ class GetAllChats(GenericAPIView):
 
 class GetChat(ListAPIView):
     def list(self, request, *args, **kwargs):
-        
-        print(request.headers)
+        token_auth, profile = pro_utils.TokenAuthenticate(request)
+        if(not(token_auth)):
+            return(Response({'message':'User Logged Out', 'status':False, 'token': False}))
 
-        return(Response({'message':'All Chats in data field', 'status':True, 'data' : 'data'}))
+        try:
+            friend_profile = pro_models.Profile.objects.get(id = request.headers['Friend'])
+        except:
+            # except pro_models.Profile.DoesNotExist:
+            return(Response({'message':'Friend Not Exist', 'status':False, 'token' : True}))
+
+        user, friend = profile.user, friend_profile.user
+        all_mssgs = mssg_models.Message.objects.filter( Q(receiver = friend) & Q(sender = user) | Q(receiver = user) & Q(sender = friend))\
+                    .order_by('date_time')
+
+        data = {'friend_data' : {'username':friend.username}, 'messages' : []}
+        for mssg in all_mssgs:
+            if(mssg.sender == user):
+                data['messages'].append(['0', mssg.mssg])
+            else:
+                data['messages'].append(['1', mssg.mssg])
+        return(Response({'message':'All Chats in data field', 'status':True, 'token':True, 'data' : data}))
+
+# make a class for creating mssg and retrieve a single mssag()
+# class MessageView(CreateAPIView, RetrieveAPIView)

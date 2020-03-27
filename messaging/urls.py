@@ -7,5 +7,6 @@ app_name = 'messaging'
 urlpatterns = [
 
     path('gac/', mssg_views.GetAllChats.as_view()),
+    path('getchat/', mssg_views.GetChat.as_view()),
     
 ]

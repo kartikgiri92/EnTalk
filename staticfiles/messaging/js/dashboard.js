@@ -108,16 +108,69 @@ function display_profile_update_space(){
 
 // STart Chat Space
 var chat_space = document.querySelector("#chat-space")
+var my_message = "rounded d-flex justify-content-end p-2 m-2";
+var friend_message = "rounded d-flex justify-content-start p-2 m-2";
 
-function fill_chat_space(friend_profile_id){
+const fill_chat_space = async (friend_profile_id) => {
+    let temp_url = window_location_origin + "/api/messaging/getchat/";
+    let response = await fetch(temp_url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": csrf_token, 
+            "Id": localStorage.getItem("id"),
+            "Authorization": localStorage.getItem("token"),
+            "Friend": friend_profile_id,
+        },
+    });
+    if(response.ok){
+        let json_obj = await response.json();
+        if(json_obj.status && json_obj.token){
+            var show_conv = document.querySelector("#show-conversation")
+            show_conv.innerHTML = ""; //deletes all mesaages
+            json_obj.data.messages.forEach(function(pair){
+
+                let temp_div = document.createElement("div");
+                let created_div = document.createElement("div");
+                created_div.innerHTML = pair[1];
+                temp_div.append(created_div);
+                show_conv.append(temp_div);
+                created_div.style.maxWidth = "40%";
+
+                if(pair[0] == '0'){
+                    // This users message
+                    temp_div.className = "d-flex justify-content-end m-2";
+                    created_div.className = "rounded p-2";
+                    created_div.style.background = "#ffde7a";
+                }
+                else{
+                    // Receiver messsages
+                    temp_div.className = "d-flex justify-content-start m-2";
+                    created_div.className = "rounded p-2";
+                    created_div.style.background = "#cee3e6";
+                }
+            });
+        }
+        else{
+            redirect_to_login();
+        }
+    }        
+}
+
+function fill_chat_space_helper(friend_username, friend_profile_id, friend_total_messages){
     hide_rough_space();
     hide_search_space();
     hide_profile_update_space();
     display_chat_space();
     delete_interval();
-    intervalID = window.setInterval(function(){        
-        console.log(friend_profile_id);
-    }, 2000);
+
+    document.querySelector("#friend-username").innerHTML = friend_username;
+    document.querySelector("#total-messages").innerHTML = friend_total_messages + " Total Messages";
+    // CHANGE FRIEND PROFILE ID
+    fill_chat_space(friend_profile_id);
+    intervalID = window.setInterval(function(){
+        fill_chat_space(friend_profile_id);
+    }, 3000);
 }
 // END Chat Space
 
@@ -242,7 +295,7 @@ const fill_user_chats = async () => {
                     temp_obj.style.cursor = "pointer";
                     temp_obj.addEventListener('click', event => {
                         // When clicked, chat will be displayed
-                        fill_chat_space(ele_obj.profile_id);
+                        fill_chat_space_helper(ele_obj.username, ele_obj.profile_id, ele_obj.total_messages);
                     });
                     user_chats_block.prepend(temp_obj);
                 }
