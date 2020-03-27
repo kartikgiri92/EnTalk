@@ -25,3 +25,26 @@
     right: 0;
     background: #cee3e6;
 }
+
+.fixed-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 300px;
+  transition: all 0.3s;
+}
+
+.fix-at-bottom-message-bar{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 300px;
+    transition: all 0.3s;
+}
+
+#show-conversation{
+    margin-top: 64px;
+    margin-bottom: 64px;
+    margin-left: 16px;
+    margin-right: 16px;
+}

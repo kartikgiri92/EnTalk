@@ -50,9 +50,6 @@
 
         </div>
         <!-- User Chats End-->
-
-        
-
     </div>
     <!-- Sidebar End -->
 
@@ -63,14 +60,23 @@
     <!-- Rough Space END-->
 
     <!-- Chat Space Start-->
-    <div class="workspace" id="chat-space" style="display: none; background: #3f9c64;">        
-        <div class="d-flex justify-content-between p-3" style="background: #cee3e6;">
-            <div id="friend-username"></div>
-            <div id="total-messages"></div>
+    <div class="workspace" id="chat-space" style="display: none; background: #3f9c64;">
+        <div class="fixed-navbar">
+            <div class="d-flex justify-content-between p-3" style="background: #cee3e6;">
+                <div id="friend-username"></div>
+                <div id="total-messages"></div>
+            </div>
         </div>
-        <div id="show-conversation" class="m-3"></div>
-        <div class="m-3">
-            <!-- make these permanent just change the id with which these are sent to -->
+        <div id="show-conversation"></div>
+        <div class="fix-at-bottom-message-bar">
+            <div class="mx-3 form-group row">
+                <div class="col-sm-11 bg-white rounded">
+                    <input type="text" class="form-control-plaintext" id="send-message-input" placeholder="Type Your Message Here">
+                </div>
+                <div class="col btn btn-sm btn-primary rounded-pill ml-2" id="send-message-button">
+                    Send
+                </div>
+            </div>
         </div>
     </div>
     <!-- Chat Space END-->

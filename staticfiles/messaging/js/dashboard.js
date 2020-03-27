@@ -1,6 +1,7 @@
 // Global Variables and functions
 var window_location_origin = window.location.origin
 var intervalID = ""
+var profile_id_of_friend_for_sending_message = ""
 
 function getCookie(name) {
     var cookieValue = null;
@@ -72,6 +73,40 @@ const retrieve_user_detail = async () => {
     }
 }
 
+const send_message = async () => {    
+    let temp_url = window_location_origin + "/api/messaging/createmessage/";
+    let response = await fetch(temp_url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": csrf_token, 
+            "Id": localStorage.getItem("id"),
+            "Authorization": localStorage.getItem("token"),
+            "Friend": profile_id_of_friend_for_sending_message,
+        },
+        body: JSON.stringify({
+            "message" : document.querySelector("#send-message-input").value, 
+        }),
+    });
+    if(response.ok){
+        let json_obj = await response.json();
+        if(json_obj.status && json_obj.token){
+            fill_chat_space(profile_id_of_friend_for_sending_message);
+        }
+        else{
+            redirect_to_login();
+        }
+    }
+    else{
+        window.alert("Error occured, reload the page.")
+    }
+}
+
+document.querySelector("#send-message-button").addEventListener('click', event => {
+    if(profile_id_of_friend_for_sending_message)
+        send_message();
+});
+
 function delete_interval(){
     clearInterval(intervalID);
 }
@@ -127,6 +162,7 @@ const fill_chat_space = async (friend_profile_id) => {
         let json_obj = await response.json();
         if(json_obj.status && json_obj.token){
             var show_conv = document.querySelector("#show-conversation")
+            document.querySelector("#total-messages").innerHTML = json_obj.data.messages.length + " Total Messages";
             show_conv.innerHTML = ""; //deletes all mesaages
             json_obj.data.messages.forEach(function(pair){
 
@@ -154,6 +190,9 @@ const fill_chat_space = async (friend_profile_id) => {
         else{
             redirect_to_login();
         }
+    }
+    else{
+        window.alert("Error occured, reload the page.")
     }        
 }
 
@@ -166,7 +205,7 @@ function fill_chat_space_helper(friend_username, friend_profile_id, friend_total
 
     document.querySelector("#friend-username").innerHTML = friend_username;
     document.querySelector("#total-messages").innerHTML = friend_total_messages + " Total Messages";
-    // CHANGE FRIEND PROFILE ID
+    profile_id_of_friend_for_sending_message = friend_profile_id
     fill_chat_space(friend_profile_id);
     intervalID = window.setInterval(function(){
         fill_chat_space(friend_profile_id);
@@ -304,6 +343,9 @@ const fill_user_chats = async () => {
         else{
             redirect_to_login();
         }
+    }
+    else{
+        window.alert("Error occured, reload the page.")
     }
 }
 

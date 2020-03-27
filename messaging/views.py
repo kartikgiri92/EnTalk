@@ -71,5 +71,20 @@ class GetChat(ListAPIView):
                 data['messages'].append(['1', mssg.mssg])
         return(Response({'message':'All Chats in data field', 'status':True, 'token':True, 'data' : data}))
 
-# make a class for creating mssg and retrieve a single mssag()
-# class MessageView(CreateAPIView, RetrieveAPIView)
+class MessageView(CreateAPIView, RetrieveAPIView):
+    serializer_class = mssg_serializers.BaseMessagingSerializer
+
+    def create(self, request, *args, **kwargs):
+        token_auth, profile = pro_utils.TokenAuthenticate(request)
+        if(not(token_auth)):
+            return(Response({'message':'User Logged Out', 'status':False, 'token': False}))
+        try:
+            friend_profile = pro_models.Profile.objects.get(id = request.headers['Friend'])
+        except:
+            # except pro_models.Profile.DoesNotExist:
+            return(Response({'message':'Friend Not Exist', 'status':False, 'token' : True}))
+
+        user, friend = profile.user, friend_profile.user
+        mssg_models.Message.objects.create(sender = user, receiver = friend, mssg = request.data['message'])
+
+        return(Response({'message':'Message Created Successfully', 'status':True, 'token':True}))
