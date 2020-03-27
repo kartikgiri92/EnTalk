@@ -55,7 +55,15 @@
 
     <!-- Rough Space Start-->
     <div class="workspace" id="rough-space">
-        THIS IS THE ROUGH SPACE
+        <div style="margin-top: 120px; margin-left: 56px;">
+            <h4 class="ml-4">EnTalk</h4>
+            <ul>
+                <li>Your Privacy is our Priority</li>
+                <li>EnTalk provides an Encrypted way to Chat</li>
+                <li>EnTalk Supports End-To-End Encryption</li>
+                <li>Start by searching friends using their Usernames</li>
+            </ul>
+        </div>
     </div>
     <!-- Rough Space END-->
 
@@ -83,8 +91,15 @@
 
     <!-- Search Space Start-->
     <div class="workspace" id="search-space" style="display: none;">
-        
-
+        <div class="m-3 form-group row">
+            <div class="col-sm-4 bg-white rounded">
+                <input type="text" class="form-control-plaintext" id="search-friend-input" placeholder="Search By Username">
+            </div>
+            <div class="col-sm-1 btn btn-sm btn-primary rounded-pill mx-2" id="search-friend-button">
+                Search
+            </div>
+        </div>
+        <div id="search-friend-results" class="m-3"></div>
     </div>
     <!-- Search Space End-->
 

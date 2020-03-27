@@ -3,7 +3,10 @@ import profiles.utils as pro_utils
 import profiles.serializers as pro_serializers
 import profiles.permissions as pro_perms
 
+import messaging.models as mssg_models
+
 import time
+from django.db.models import Q
 from rest_framework.parsers import FileUploadParser
 from django.db import connection, reset_queries
 from rest_framework import viewsets
@@ -30,6 +33,25 @@ class RetrieveUserDetail(GenericAPIView):
         instance = profile.user
         serializer = pro_serializers.BaseUserSerializer(instance)
         return Response({'status':True, 'user' : serializer.data, 'token' : True})
+
+class SearchFriend(GenericAPIView):
+    def post(self, request, *args, **kwargs):
+        token_auth, profile = pro_utils.TokenAuthenticate(request)
+        if(not(token_auth)):
+            return(Response({'message':'User Logged Out', 'status':False, 'token': False}))
+
+        try:
+            friend_obj = User.objects.get(Q(username = request.data['key']))
+        except:
+            return Response({'message':'No user Found', 'status':False, 'token' : True})
+
+        if(friend_obj == profile.user):
+            return Response({'message':'No user Found', 'status':False, 'token' : True})
+
+        total_messages = mssg_models.Message.objects.filter( Q(receiver = friend_obj) & Q(sender = profile.user) | Q(receiver = profile.user) & Q(sender = friend_obj)).count()
+        data = {'friend_profile_id' : friend_obj.profile.id, 'friend_username': friend_obj.username, 'total_messages':total_messages}
+    
+        return Response({'message': 'User Found', 'status':True, 'token' : True, 'data' : data})
 
 class UserLogin(GenericAPIView):
 

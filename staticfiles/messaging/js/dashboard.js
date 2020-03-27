@@ -216,6 +216,52 @@ function fill_chat_space_helper(friend_username, friend_profile_id, friend_total
 
 // START Search Space
 var search_space = document.querySelector("#search-space")
+var search_friend_input = document.querySelector("#search-friend-input")
+var search_friend_button = document.querySelector("#search-friend-button")
+var search_friend_results = document.querySelector("#search-friend-results")
+
+const search_friend_api = async () => {
+    let temp_url = window_location_origin + "/api/profiles/searchfriend/";
+    let response = await fetch(temp_url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": csrf_token, 
+            "Id": localStorage.getItem("id"),
+            "Authorization": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+            "key" : search_friend_input.value, 
+        }),
+    });
+    if(response.ok){
+        let json_obj = await response.json();
+        if(json_obj.status && json_obj.token){
+            search_friend_results.innerHTML = "User Found";
+            let create_temp_div = document.createElement("div");
+            create_temp_div.className = "btn btn-sm btn-primary rounded p-2 ml-3";
+            create_temp_div.innerHTML = json_obj.data.friend_username + "  (click to start chat)";
+            search_friend_results.append(create_temp_div);
+            create_temp_div.addEventListener('click', event => {
+                fill_chat_space_helper(json_obj.data.friend_username, json_obj.data.friend_profile_id, json_obj.data.total_messages);
+            })
+        }
+        else if(!json_obj.token){
+            redirect_to_login();
+        }
+        else{
+            search_friend_results.innerHTML = "Username Not Found";
+        }
+    }
+    else{
+        window.alert("Error occured, reload the page.")
+    }
+}
+
+search_friend_button.addEventListener('click', event => {
+    search_friend_api();
+});
+
 // END Search Space
 
 
