@@ -65,7 +65,7 @@ def random_prime_numbers_in_range(range_start, range_end):
     return(p, q)
 
 def generate_secret_keys():
-    range_start, range_end = 100, 1000
+    range_start, range_end = 1, 250
     p, q = random_prime_numbers_in_range(range_start, range_end)
     public_key, tot = p * q, (p - 1) * (q - 1)
     k, public_key_2 = 2, 2

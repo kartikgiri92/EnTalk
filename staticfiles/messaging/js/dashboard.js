@@ -209,7 +209,7 @@ function fill_chat_space_helper(friend_username, friend_profile_id, friend_total
     fill_chat_space(friend_profile_id);
     intervalID = window.setInterval(function(){
         fill_chat_space(friend_profile_id);
-    }, 3000);
+    }, 5000);
 }
 // END Chat Space
 
