@@ -43,7 +43,41 @@ def TokenAuthenticate(request):
             return(True, profile)
     return(False, None)
 
+def random_prime_numbers_in_range(range_start, range_end):
+    l = []
+    prime = [True for i in range(range_end + 1)]
+    p = 2
+    while (p * p <= range_end):
+        if (prime[p] == True):
+            for i in range(p * 2, range_end + 1, p):
+                prime[i] = False
+        p += 1
+    prime[0]= False
+    prime[1]= False
+    for p in range(range_end + 1):
+        if(p >= range_start and prime[p]):
+            l.append(p)
+
+    p, q = random.choice(l), random.choice(l)
+
+    while(p == q):
+        q = random.choice(l)
+    return(p, q)
+
 def generate_secret_keys():
-    
+    range_start, range_end = 100, 1000
+    p, q = random_prime_numbers_in_range(range_start, range_end)
+    public_key, tot = p * q, (p - 1) * (q - 1)
+    k, public_key_2 = 2, 2
+    for public_key_2 in range(public_key_2,tot):
+        if(gcd(public_key_2, tot) == 1):
+            break
+
+    while(True):
+        x = (1 + (k * tot))
+        if(x % public_key_2 == 0):
+            private_key = int(x/public_key_2)
+            break
+        k += 1
 
     return(str(private_key), str(public_key), str(public_key_2))
