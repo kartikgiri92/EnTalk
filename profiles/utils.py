@@ -4,6 +4,12 @@ import profiles.models as pro_models
 
 from string import ascii_letters, punctuation
 
+def gcd(a,b):
+    if(b == 0):
+        return(a)
+    else:
+        return(gcd(b, a % b))
+
 def current_milli_time():
     return int(round(time.time() * 1000))
 
@@ -36,3 +42,8 @@ def TokenAuthenticate(request):
         if(temp > current_milli_time()):
             return(True, profile)
     return(False, None)
+
+def generate_secret_keys():
+    
+
+    return(str(private_key), str(public_key), str(public_key_2))

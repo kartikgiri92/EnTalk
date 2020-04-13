@@ -9,6 +9,7 @@ class Profile(models.Model):
     time_token_created = models.CharField(blank=True, max_length=30)
     private_key = models.CharField(max_length=30)
     public_key = models.CharField(max_length=30)
+    public_key_2 = models.CharField(max_length=30)
 
     def __str__(self):
         return(self.user.username)
