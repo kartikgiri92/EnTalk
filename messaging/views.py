@@ -3,6 +3,7 @@ import profiles.utils as pro_utils
 import profiles.serializers as pro_serializers
 
 import messaging.models as mssg_models
+import messaging.utils as mssg_utils
 import messaging.serializers as mssg_serializers
 
 import time
@@ -66,9 +67,11 @@ class GetChat(ListAPIView):
         data = {'friend_data' : {'username':friend.username}, 'messages' : []}
         for mssg in all_mssgs:
             if(mssg.sender == user):
-                data['messages'].append(['0', mssg.mssg])
+                dcy_mssg = mssg_utils.decrypt_message(friend_profile, mssg.mssg)
+                data['messages'].append(['0', dcy_mssg])
             else:
-                data['messages'].append(['1', mssg.mssg])
+                dcy_mssg = mssg_utils.decrypt_message(profile, mssg.mssg)
+                data['messages'].append(['1', dcy_mssg])
         return(Response({'message':'All Chats in data field', 'status':True, 'token':True, 'data' : data}))
 
 class MessageView(CreateAPIView, RetrieveAPIView):
@@ -85,6 +88,7 @@ class MessageView(CreateAPIView, RetrieveAPIView):
             return(Response({'message':'Friend Not Exist', 'status':False, 'token' : True}))
 
         user, friend = profile.user, friend_profile.user
-        mssg_models.Message.objects.create(sender = user, receiver = friend, mssg = request.data['message'])
+        enc_mssg = mssg_utils.encrypt_message(friend_profile, request.data['message'])
+        mssg_models.Message.objects.create(sender = user, receiver = friend, mssg = enc_mssg)
 
         return(Response({'message':'Message Created Successfully', 'status':True, 'token':True}))

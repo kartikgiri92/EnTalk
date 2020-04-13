@@ -8,4 +8,4 @@ User = get_user_model();
 class BaseMessagingSerializer(serializers.ModelSerializer):
     class Meta:
         model = mssg_models.Message
-        fields = ('msgg')
+        fields = ('mssg')
