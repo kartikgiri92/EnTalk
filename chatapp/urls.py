@@ -11,5 +11,6 @@ urlpatterns = [
     path('api/messaging/', include('messaging.urls')),
     path('', TemplateView.as_view(template_name="profiles/login_sign_up.html")),
     path('dashboard/', TemplateView.as_view(template_name="messaging/dashboard.html")),
+    path('show/', TemplateView.as_view(template_name="messaging/show.html")),
 
 ]

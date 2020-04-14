@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'messaging/css/show.css' %}">
+{% endblock %}
+        
+{% block page_content %}
+<nav class="navbar navbar-expand-lg" style="background: #cee3e6">
+    <a id="dashboard-link" class="navbar-brand" href="" style="color: black">EnTalk</a>
+</nav>
+<div class="m-5">
+    <ol>
+        <li>
+            Each time a user is created. Function to create his/her secret keys is executed. The function generates public key in two parts and a private key.
+        </li><br>
+        <li>
+            Generation of Secret keys - 
+            <ol type="a">
+                <li>Select two Prime numbers. In this project, the prime numbers are selected from the range 1 - 250.</li>
+                <li>The range is kept short because if prime numbers selcted are large then decryption time would be very large as power function is used for decryption.</li>
+                <li>Further by following the algorithm we find the keys.</li>
+            </ol>
+        </li><br>
+        <li>
+            Encryption Of message
+            <ol>
+                <li>Convert all the letters of the original message into their ascii form. Example <u>A = 65</u>, <u># = 35</u>, <u>a = 97</u></li>
+                <li>We need to do the above step because
+                    <ul>
+                        <li>RSA encrypts integers only.</li>
+                        <li>The integer should always be lesser than product of p and q.</li>
+                    </ul>
+                </li>
+                <li>So now, We encrypt each letter individually.</li>
+                <li>Convert them into string form and add all the ciper text into one. This will be our encrypted message.</li>
+            </ol>
+        </li><br>
+        <li>
+            Decryption of message
+            <ol>
+                <li>The long encrypted ciper text is first broken into parts.</li>
+                <li>Each broken part is converted back to ascii form using the private key.</li>
+                <li>Ascii numbers are then converted to characters.</li>
+            </ol>
+        </li><br>
+        TL;DR - Each letter is encrypted individually. Than combined to form one string. To decrypt, the long string is broken into parts and each broken part is then converted back to ascii numbers.
+    </ol>
+</div>
+<div class="m-5">
+    <h3>Example - </h3>
+    <div class="pl-5">
+        <ol style="font-size: 30px;">
+            <li>
+                <div class="d-flex justify-content-around my-3">
+                    <div id="prime-number-p" class="rounded-pill btn btn-md btn-primary" style="font-size: 25px;">Randomly generated P = </div>
+                    <div id="prime-number-q" class="rounded-pill btn btn-md btn-primary" style="font-size: 25px;">Randomly generated Q = </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-center my-3">
+                    <div id="primary-key-1" class="rounded-pill btn btn-md btn-success" style="font-size: 25px;">
+                        Primary key 1 = (P * Q) = 
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-center my-3">
+                    <div id="tot" class="rounded-pill btn btn-md btn-primary" style="font-size: 25px;">
+                        Totient = (P - 1) * (Q - 1) = 
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-around my-3">
+                    <div id="primary-key-2" class="rounded-pill btn btn-md btn-success" style="font-size: 25px;">Primary Key 2 = </div>
+                    <div id="k-constant" class="rounded-pill btn btn-md btn-primary" style="font-size: 25px;">K Constant = </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-center my-3">
+                    <div id="private-key" class="rounded-pill btn btn-md btn-success" style="font-size: 25px;">
+                        Private key = ((1 + (K * Totient)) / Primary Key 2 ) = 
+                    </div>
+                </div>
+            </li>
+        </ol>
+
+        <br><hr><br><hr>
+
+        <div class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" class="form-control" id="message" placeholder="Enter Message" style="width: 700px">
+            </div>
+            <button id="convert-btn" class="btn btn-primary mb-2">Convert</button>
+        </div>
+
+        <ul class="pt-4">
+            <li>
+                Each letter converted to Ascii Number
+                <div id="ascii-box" class="rounded p-2" style="border: solid;"></div>
+            </li>
+            <li class="mt-3">
+                Each letter encrypted individually
+                <div id="encrypted-box" class="rounded p-2" style="border: solid;"></div>
+            </li>
+            <hr>
+            <li class="mt-3">
+                Cipher Text - 
+                <div id="cipher-text"></div>
+            </li>
+            <hr>
+
+            <li>
+                Cipher Text broken into parts
+                <div id="broken-box" class="rounded p-2" style="border: solid;"></div>
+            </li>
+            <li class="mt-3">
+                Each part decrypted back to Ascii number
+                <div id="decrypt-box" class="rounded p-2" style="border: solid;"></div>
+            </li>
+            <li class="mt-3">
+                Ascii number converted back to character
+                <div id="character-box" class="rounded p-2" style="border: solid;"></div>
+            </li>
+            <hr>
+            <li class="mt-3">
+                Decrypted Text - 
+                <div id="decrypted-text"></div>
+            </li>
+            <hr>
+
+        </ul>
+
+    </div>
+</div>
+
+
+{% endblock %}
+    
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'messaging/js/show.js' %}"></script>
+{% endblock %}
