@@ -91,6 +91,7 @@ const send_message = async () => {
     if(response.ok){
         let json_obj = await response.json();
         if(json_obj.status && json_obj.token){
+            document.querySelector("#send-message-input").value = ''
             fill_chat_space(profile_id_of_friend_for_sending_message);
         }
         else{
