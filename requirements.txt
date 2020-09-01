@@ -1,4 +1,4 @@
-asgiref==3.2.3
+asgiref
 Django>=3.0.7
 djangorestframework==3.11.0
 pytz==2019.3
